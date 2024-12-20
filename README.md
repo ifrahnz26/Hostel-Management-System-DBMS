@@ -26,7 +26,7 @@
 ### Step 1: Clone the Repository
 1. Clone the repository:
    ```bash
-   git clone https://github.com/ifrahnz26/hostel-management-system-dbms.git
+   git clone https://github.com/ifrahnz26/Hostel-Management-System-DBMS.git
    ```
 2. Import the project into Eclipse:
    - Open Eclipse and navigate to `File > Import > Existing Projects into Workspace`.
