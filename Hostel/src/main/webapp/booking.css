@@ -1,0 +1,130 @@
+/* General Reset */
+body, h1, h2, p, a, input, select, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F3F0F8;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    background-color: #4B2840;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #704C5E;
+    overflow: hidden;
+    border-bottom: 3px solid #C799A6;
+}
+
+nav a {
+    color: white;
+    padding: 14px 20px;
+    float: left;
+    text-decoration: none;
+    text-align: center;
+}
+
+nav a:hover {
+    background-color: #C799A6;
+    color: white;
+}
+
+nav a.active {
+    background-color: #42033D;
+}
+
+/* Container */
+.container {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Booking Form */
+.booking-form h2 {
+    color: #4A3C72;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.booking-form {
+    display: grid;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 16px;
+    color: #4A3C72;
+    margin-bottom: 8px;
+}
+
+input, select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #42033D;
+    color: white;
+    cursor: pointer;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #3A2D59;
+}
+
+/* Meals Per Day Selection */
+#mealsPerDay {
+    display: none;
+}
+
+.food-options label {
+    margin-right: 15px;
+    font-weight: normal;
+}
+
+/* Footer */
+.footer {
+    background-color: #704C5E; /* Deep Purple */
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,69 @@
+footer {
+    background-color: #A888B5; /* Muted lavender background */
+    color: #ffffff; /* White text for better contrast */
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    font-size: 14px;
+}
+
+hr.light {
+    border-top: 1px solid #FFD2A0; /* Light orange color for the separator */
+    width: 75%;
+    margin-top: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+footer a {
+    color: #FFD2A0; /* Light orange for links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffffff; /* White on hover */
+}
+
+footer h5 {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
+
+footer .social-icons a {
+    margin: 0 10px;
+    font-size: 20px;
+    color: #FFD2A0; /* Match link color */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+footer .social-icons a:hover {
+    color: #ffffff;
+    transform: scale(1.2); /* Zoom effect on hover */
+}
+
+footer .address,
+footer .hours,
+footer .service-areas {
+    margin-bottom: 1rem;
+}
+
+footer .container-fluid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+@media (max-width: 768px) {
+    footer h5 {
+        font-size: 16px;
+    }
+
+    footer p {
+        font-size: 14px;
+    }
+}
