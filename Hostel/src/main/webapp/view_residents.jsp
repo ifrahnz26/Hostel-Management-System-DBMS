@@ -80,8 +80,8 @@ nav a.active {
     color: white;
     padding: 5px;
     text-align: center;
-    width: full;  /* Ensures footer covers full width */
-    position: relative; /* Ensures it stays at the bottom of content */
+    width: full; 
+    position: relative; 
     bottom: 0;
     left: 0;
 }
@@ -168,10 +168,9 @@ table tr:hover {
             </thead>
             <tbody>
                 <%
-                    // Database connection parameters
-                    String url = "jdbc:mysql://localhost:3306/hostelproj"; // Replace with your DB URL
-                    String user = "root"; // Replace with your DB username
-                    String password = ""; // Replace with your DB password
+                    String url = "jdbc:mysql://localhost:3306/hostelproj"; 
+                    String user = "root"; 
+                    String password = ""; 
                     Connection conn = null;
                     PreparedStatement stmt = null;
                     ResultSet rs = null;
