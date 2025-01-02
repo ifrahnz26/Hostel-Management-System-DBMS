@@ -13,10 +13,8 @@ import java.util.*;
 
 public class RoomBookingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Set the content type for the response
         response.setContentType("text/html;charset=UTF-8");
 
-        // Get the PrintWriter to send output to the client
         PrintWriter out = response.getWriter();
 
         // Retrieve parameters from the form
@@ -30,13 +28,12 @@ public class RoomBookingServlet extends HttpServlet {
         String userID = (String) session.getAttribute("UserID");
 
         if (userID == null) {
-            // Handle the case where userId is not found in the session
             response.sendRedirect("userlogin.jsp");
             return;
         }
         int user = Integer.parseInt(userID);
 
-        // Error handling for missing or invalid duration
+        // Error handling
         int duration = 0;
         if (durationStr == null || durationStr.trim().isEmpty()) {
             out.println("Duration is missing.");
@@ -44,13 +41,12 @@ public class RoomBookingServlet extends HttpServlet {
         }
 
         try {
-            duration = Integer.parseInt(durationStr); // Parse duration as integer
+            duration = Integer.parseInt(durationStr);
         } catch (NumberFormatException e) {
             out.println("Invalid duration format.");
             return;
         }
 
-        // Check if the room number and check-in date are provided
         if (roomNumber == null || roomNumber.trim().isEmpty()) {
             out.println("Room number is missing.");
             return;
@@ -61,7 +57,7 @@ public class RoomBookingServlet extends HttpServlet {
             return;
         }
 
-        // Process food options if selected
+        // Process food options only if option is selected
         int mealsPerDay = 0;
         int foodCostPerDay = 0;
         if ("yes".equalsIgnoreCase(foodOption)) {
@@ -70,15 +66,14 @@ public class RoomBookingServlet extends HttpServlet {
                 return;
             }
             try {
-                mealsPerDay = Integer.parseInt(meals); // Parse meals per day
-                foodCostPerDay = mealsPerDay * 50; // Assuming ₹50 per meal per day
+                mealsPerDay = Integer.parseInt(meals); 
+                foodCostPerDay = mealsPerDay * 50; 
             } catch (NumberFormatException e) {
                 out.println("Invalid meals selection.");
                 return;
             }
         }
 
-        // Database connection variables
         Connection connection = null;
         PreparedStatement bookingInsertStmt = null;
         PreparedStatement foodInsertStmt = null;
@@ -87,10 +82,8 @@ public class RoomBookingServlet extends HttpServlet {
         PreparedStatement paymentInsertStmt = null;
 
         try {
-            // Load the database driver (adjust for your DB configuration)
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Establish the database connection
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hostelproj", "root", "");
 
             // Retrieve the room cost from the Room table
@@ -101,26 +94,25 @@ public class RoomBookingServlet extends HttpServlet {
 
             double roomPrice = 0;
             if (roomResult.next()) {
-                roomPrice = roomResult.getDouble("price"); // Assuming the room has a 'price' field
+                roomPrice = roomResult.getDouble("price");
             }
 
-            // Insert into Booking table
+            // Insert the booking details into Booking table
             String bookingQuery = "INSERT INTO Booking (UserID, RoomNumber, BookingDate, CheckInDate, CheckOutDate) VALUES (?, ?, NOW(), ?, DATE_ADD(?, INTERVAL ? DAY))";
             bookingInsertStmt = connection.prepareStatement(bookingQuery, Statement.RETURN_GENERATED_KEYS);
             bookingInsertStmt.setInt(1, user);
             bookingInsertStmt.setString(2, roomNumber);
             bookingInsertStmt.setString(3, checkInDate);
-            bookingInsertStmt.setString(4, checkInDate); // Assuming CheckOutDate is calculated
+            bookingInsertStmt.setString(4, checkInDate); 
             bookingInsertStmt.setInt(5, duration);
 
             int bookingResult = bookingInsertStmt.executeUpdate();
 
-            // Retrieve the generated bookingID
             int bookingID = 0;
             if (bookingResult > 0) {
                 ResultSet generatedKeys = bookingInsertStmt.getGeneratedKeys();
                 if (generatedKeys.next()) {
-                    bookingID = generatedKeys.getInt(1); // Retrieve the generated bookingID
+                    bookingID = generatedKeys.getInt(1); 
                 }
             } else {
                 out.println("Failed to book room.");
@@ -133,12 +125,11 @@ public class RoomBookingServlet extends HttpServlet {
                 foodInsertStmt = connection.prepareStatement(foodQuery);
                 foodInsertStmt.setString(1, roomNumber);
                 foodInsertStmt.setInt(2, mealsPerDay);
-                foodInsertStmt.setInt(3, foodCostPerDay); // Store the total cost for food per day
+                foodInsertStmt.setInt(3, foodCostPerDay); 
 
                 int foodResult = foodInsertStmt.executeUpdate();
 
                 if (foodResult > 0) {
-                    // Food preference inserted successfully
                 } else {
                     out.println("Failed to add food preference.");
                 }
@@ -151,20 +142,20 @@ public class RoomBookingServlet extends HttpServlet {
             int roomStatusUpdateResult = updateRoomStatusStmt.executeUpdate();
 
             if (roomStatusUpdateResult > 0) {
-                // Room status updated successfully
+                
             } else {
                 out.println("Failed to update room status.");
             }
 
             // Calculate final total cost (room cost + food cost)
-            double totalFoodCost = foodCostPerDay * duration; // Food cost for the selected duration
-            double finalTotalCost = roomPrice * duration + totalFoodCost; // Total cost (room + food)
+            double totalFoodCost = foodCostPerDay * duration; 
+            double finalTotalCost = roomPrice * duration + totalFoodCost; 
 
             // Insert payment record into Payment table with status 'Pending'
             String paymentQuery = "INSERT INTO Payment (BookingID, Amount, PaymentDate, PaymentMode, PaymentStatus) VALUES (?, ?, NOW(), 'Card', 'Pending')";
             paymentInsertStmt = connection.prepareStatement(paymentQuery);
-            paymentInsertStmt.setInt(1, bookingID); // Use the generated BookingID
-            paymentInsertStmt.setDouble(2, finalTotalCost); // Total amount (room + food)
+            paymentInsertStmt.setInt(1, bookingID); 
+            paymentInsertStmt.setDouble(2, finalTotalCost); 
             int paymentResult = paymentInsertStmt.executeUpdate();
 
             if (paymentResult > 0) {
@@ -173,12 +164,10 @@ public class RoomBookingServlet extends HttpServlet {
                 out.println("Failed to insert payment record.");
             }
 
-            // Store the final total cost in session
             session.setAttribute("roomNumber", roomNumber);
             session.setAttribute("roomCost", roomPrice);
             session.setAttribute("foodCost", totalFoodCost);
 
-            // Forward to confirmation page
             RequestDispatcher rd = request.getRequestDispatcher("confirmation.jsp");
             rd.forward(request, response);
 
@@ -186,7 +175,6 @@ public class RoomBookingServlet extends HttpServlet {
             e.printStackTrace();
             out.println("Database error occurred.");
         } finally {
-            // Close database resources
             try {
                 if (bookingInsertStmt != null) {
                     bookingInsertStmt.close();

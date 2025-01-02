@@ -49,4 +49,34 @@
     <servlet-name>adminlogin</servlet-name>
     <url-pattern>/adminlogin</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RegisterServlet</display-name>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>com.hostelmanagement.controller.RegisterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/RegisterServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddRoomServlet</display-name>
+    <servlet-name>AddRoomServlet</servlet-name>
+    <servlet-class>com.hostelmanagement.controller.AddRoomServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddRoomServlet</servlet-name>
+    <url-pattern>/AddRoomServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RemoveRoomServlet</display-name>
+    <servlet-name>RemoveRoomServlet</servlet-name>
+    <servlet-class>com.hostelmanagement.controller.RemoveRoomServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveRoomServlet</servlet-name>
+    <url-pattern>/RemoveRoomServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

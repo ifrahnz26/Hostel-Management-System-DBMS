@@ -54,16 +54,15 @@ public class adminlogin extends HttpServlet {
 
                     // Check if user credentials are valid
                     if (rs.next()) {
-                        // Get user details from the result set
                         name = rs.getString("name");
                         emailid = rs.getString("email");
-                        adminID = rs.getString("AdminID"); // Assuming 'userId' is a column in the 'User' table
+                        adminID = rs.getString("AdminID"); 
 
                         // Create a new session and store user information
                         HttpSession hs = request.getSession();
                         hs.setAttribute("name", name);
                         hs.setAttribute("email", emailid);
-                        hs.setAttribute("AdminID", adminID); // Store userId in session
+                        hs.setAttribute("AdminID", adminID); 
 
 
                         // Forward the request to the next page (e.g., dashboard)
@@ -80,7 +79,6 @@ public class adminlogin extends HttpServlet {
                     ps.close();
                 }
             } catch (Exception e) {
-                // Handle any exceptions
                 e.printStackTrace();
                 out.println("Error: " + e.getMessage());
             }

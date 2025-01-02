@@ -174,7 +174,7 @@
     <main role="main">
         <div class="container">
             <h2 class="text-center">Room Details Form</h2>
-            <form action="addRoom" method="post">
+            <form action="AddRoomServlet" method="post">
                 <div class="form-group">
                     <label for="roomNumber">Room Number</label>
                     <input type="text" class="form-control" id="roomNumber" name="roomNumber" required>

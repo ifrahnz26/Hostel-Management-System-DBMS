@@ -17,7 +17,8 @@
 					<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Rooms</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown01">
 						<a class="dropdown-item" href="add_room.jsp">Add Room</a>
-						<a class="dropdown-item" href="updateroom.jsp">Update Room</a>
+						<a class="dropdown-item" href="removeroom.jsp">Remove Room</a>
+						<a class="dropdown-item" href="roomdetails.jsp">Room Details</a>
 					</div>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="logout.jsp">Logout</a></li>

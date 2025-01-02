@@ -171,13 +171,22 @@ main {
                         </div>
                     </div>
                     
-                    <!-- Card 3: Update Room -->
+                    <!-- Card 3: Remove Room -->
                     <div class="carousel-item">
                         <div class="card">
-                            <img src="images/room2.jpg" alt="Update Room">
-                            <h2>Update Room</h2>
-                            <p>Update details of an existing room.</p>
-                            <a href="update_room.jsp">Update Room</a>
+                            <img src="images/room2.jpg" alt="Remove Room">
+                            <h2>Remove Room</h2>
+                            <p>Remove details an existing room.</p>
+                            <a href="removeroom.jsp">Remove Room</a>
+                        </div>
+                    </div>
+                    <!-- Card 4: Room details -->
+                    <div class="carousel-item">
+                        <div class="card">
+                            <img src="images/bg2.jpg" alt="Room Details">
+                            <h2>Room Details</h2>
+                            <p>Details of all the room.</p>
+                            <a href="roomdetails.jsp">Room Details</a>
                         </div>
                     </div>
                 </div>
