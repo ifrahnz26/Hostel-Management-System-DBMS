@@ -10,12 +10,11 @@
 <body>
     <%
         // Invalidate the session to log the user out
-        HttpSession hs = request.getSession(false); // Get the current session, don't create a new one if it doesn't exist
+        HttpSession hs = request.getSession(false); 
         if (hs != null) {
             hs.invalidate(); // Invalidate the session
         }
 
-        // Redirect the user to the index.jsp page after logging out
         response.sendRedirect("index.jsp");
     %>
 </body>

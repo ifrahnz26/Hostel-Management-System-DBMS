@@ -184,7 +184,6 @@ table tr:hover {
                         stmt = conn.prepareStatement(sql);
                         rs = stmt.executeQuery();
 
-                        // Loop through the result set and display data in the table
                         while (rs.next()) {
                 %>
                             <tr>

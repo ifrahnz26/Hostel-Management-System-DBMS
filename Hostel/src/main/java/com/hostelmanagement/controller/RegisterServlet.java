@@ -49,8 +49,6 @@ public class RegisterServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("userlogin.jsp");
             rd.forward(request, response);
 
-           
-
             // Close resources
             statement.close();
             connection.close();
